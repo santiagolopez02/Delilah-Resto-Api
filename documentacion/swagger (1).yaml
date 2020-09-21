@@ -1,0 +1,320 @@
+swagger: "2.0"
+info:
+  description: "Proyecto Api-Rest para Resto. Desarrollo Web FullStack Globant-Acamida."
+  version: "1.0.0"
+  title: "Delilah Resto"
+  
+
+basePath: "/v2"
+
+tags:
+- name: "usuario"
+  description: "Registro y loggin de Usuarios"
+- name: "producto"
+  description: "Lista de productos"
+- name: "pedido"
+  description: "Info de ordenes creadas"
+  
+schemes:
+- "http"
+
+consumes:
+- "application/json"
+- "application/xml"
+produces:
+- "application/xml"
+- "application/json"
+
+paths:
+  /usuario/registro:
+    post:
+      tags:
+      - "usuario"
+      summary: "Registra un nuevo usuario"
+      description: ""
+      operationId: "crearUsuario"
+      parameters:
+      - in: "body"
+        name: "Data para registrar el usuario"
+        description: "Requiere informacion necesaria para completar los campos de usuario"
+        required: true
+        schema:
+          $ref: "#/definitions/usuario/registro"
+      responses:
+        "400":
+          description: "Error con la BD"
+        "500":
+          description: "Error con los datos(ya estan registrados)"
+        "200":
+          description: "El usuario se creo con exito"
+  /usuario/login:
+    post:
+      tags:
+      - "usuario"
+      summary: "Inicia seccion de usuario"
+      description: ""
+      operationId: "logIn"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Recibe parametros del body"
+        required: true
+        schema:
+          $ref: "#/definitions/usuario/login"
+      responses:
+        "400":
+          description: "Error con la BD."
+        "404":
+          description: "Username or password invalid."
+        "200":
+          description: "Usuario logueado"
+  /producto:
+    get:
+      tags:
+      - "producto"
+      summary: "Retorna todos los productos"
+      description: "Retorna todo los producto que hay en la BD"
+      operationId: "traerProductos"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "token"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "500":
+          description: "Hubo un error con la base de datos."
+        "200":
+          description: "Lista de producto"
+    post:
+      tags:
+      - "producto"
+      summary: "Crear producto nuevo"
+      description: "Crea producto nuevo en BD"
+      operationId: "crearProducto"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Requiere data para completar campos de producto"
+        required: true
+        schema:
+          $ref: "#/definitions/producto"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Error con el tipo de dato de producto"
+        "403":
+          description: "Token no registrado como adm."
+        "201":
+          description: "Producto creado"
+  post:
+      tags:
+      - "producto"
+      summary: "Actualiza un producto"
+      description: "Actualiza un producto creado en la D"
+      operationId: "actualizarProducto"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Requiere data para completar campos de producto"
+        required: true
+        schema:
+          $ref: "#/definitions/producto/:id"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Error con el tipo de dato de producto"
+        "403":
+          description: "Token no registrado como adm."
+        "201":
+          description: "Producto Actualizado"        
+  /producto/{id}:
+    delete:
+      tags:
+      - "producto"
+      summary: "Elimina producto"
+      description: "Elimina producto de BD segun id"
+      operationId: "borrarProducto"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Producto id"
+        required: true
+        type: "number"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "403":
+          description: "Problema con la verificacion del Token"
+        "404":
+          description: "El producto no existe."
+        "200":
+          description: "Producto eliminado."
+  /pedido:
+    get:
+      tags:
+      - "pedido"
+      summary: "Retorna lista de pedidos"
+      description: "Retorna lista de pedidos segun tipo de usuario (isAdm true o false)"
+      operationId: "listaDeOrdenes"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "token"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "403":
+          description: "Problema con la verificacion del Token."
+        "200":
+          description: "Lista de ordenes."
+    post:
+      tags:
+      - "pedido"
+      summary: "Crea un nuevo pedido"
+      description: "Crea un nuevo pedido en la BD"
+      operationId: "crarOrdenNueva"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Requiere data para completar campos de producto"
+        required: true
+        schema:
+          $ref: "#/definitions/producto/:id"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Error con el tipo de dato de pedido"
+        "403":
+          description: "Problema con la verificacion del Token."
+        "500":
+          description: "No se pudo crear el pedido"
+        "201":
+          description: "La orden fue creada con exito"
+  /pedido/{id}:
+    delete:
+      tags:
+      - "pedido"
+      summary: "Borra una orden"
+      description: "Borra una orden segun el ID."
+      operationId: "borrarOrden"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Order id"
+        required: true
+        type: "number"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "403":
+          description: "Problema con la verificacion del Token."
+        "404":
+          description: "El pedido no existe."
+        "200":
+          description: "Pedido borrado"
+definitions:
+  usuario:
+    type: "object"
+    properties:
+      userName:
+        type: "string"
+      pasword:
+        type: "string"
+      fullName:
+        type: "string"
+      email:
+        type: "string"
+      phoneNumber:
+        type: "string"
+      address:
+        type: "string"
+      isAdmin:
+        type: "boolean"
+    xml:
+      name: "usuario"
+  usuarioLogin:
+    type: "object"
+    properties:
+      userName:
+        type: "string"
+      pasword:
+        type: "string"
+    xml:
+      name: "UsuarioLogin"
+  producto:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "number"
+    xml:
+      name: "Producto"
+  pedido:
+    type: "object"
+    properties:
+      paymentMethod:
+        type: "string"
+        enum:
+        - "EFECTIVO"
+        - "TARJETA"
+      productsArray:
+        type: "array"
+        items:
+          type: object
+          properties:
+            id:
+              type: "number"
+            quantity:
+              type: "number"
+    xml:
+      name: "pedido"
+  

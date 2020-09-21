@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "318f52b9-191f-4cd8-bc2c-553aaee8abc6",
+		"name": "Postman Echo",
+		"description": "Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://postman-echo.com](https://postman-echo.com/?source=echo-collection-app-onboarding)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post registro Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"santiago lopez\",\r\n    \"contraseña\" : \"asd124124124\",\r\n    \"direccion\" : \"5135156fafasf\",\r\n    \"email\" : \"sasd123@41241asd.com\",\r\n    \"telefono\": \"+asd2eqw232\",\r\n    \"isAdm\" : \"true\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario/registro?username=santiago&constraseña=asd1124&direccion=asda54154&email=asf214&telefono=+9565asfasf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"registro"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "santiago"
+						},
+						{
+							"key": "constraseña",
+							"value": "asd1124"
+						},
+						{
+							"key": "direccion",
+							"value": "asda54154"
+						},
+						{
+							"key": "email",
+							"value": "asf214"
+						},
+						{
+							"key": "telefono",
+							"value": "+9565asfasf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post Loggin Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"santiago lopez\",\r\n    \"contraseña\" : \"asd124124124\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario/login?username&contraseña",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": null
+						},
+						{
+							"key": "contraseña",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post para crear Producto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJzYW50aWFnbyBsb3BleiIsImlzQWRtIjp0cnVlLCJpYXQiOjE2MDA2NTIwOTh9.X8-qWvKGQnah2UX8YH4W1TP6yEU8AjITGFR_dAqX85A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"banana\",\r\n    \"categoria\" : \"Comida\",\r\n    \"precio\" : 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producto/?nombre&categoria&precio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						""
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": null
+						},
+						{
+							"key": "categoria",
+							"value": null
+						},
+						{
+							"key": "precio",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de producto",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJzYW50aWFnbyBsb3BleiIsImlzQWRtIjp0cnVlLCJpYXQiOjE2MDA2NTE5NDl9.9Zrapx38C-YvP2Evv9eTTtkZv0xteXUwojuE7FHSOX0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producto/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put para modificar productos",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJzYW50aWFnbyBsb3BleiIsImlzQWRtIjp0cnVlLCJpYXQiOjE2MDA2NTM4OTF9.owxwN0xcCW6Hp0p5nwIrcW997eSfzz7EWKpR5Vk2qFE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\" : \"peras\",\r\n    \"categoria\": \"Postre\",\r\n    \"precio\" : 400\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producto/:id?nombre&categoria&precio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						":id"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": null
+						},
+						{
+							"key": "categoria",
+							"value": null
+						},
+						{
+							"key": "precio",
+							"value": null
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get para traer la lista de productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/producto/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posta para enviar un pedido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYW50aWFnbyIsImlzQWRtIjpmYWxzZSwiaWF0IjoxNjAwNzE2NDMyfQ.Iysvc4JI74AxBVUxuJT-9WYT4neiuDOSRevjY3PdfHw",
+						"type": "text"
+					},
+					{
+						"key": "products",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"metodoPago\"  : \"EFECTIVO\",\r\n    \"productsArray\" : [{\r\n        \"id\":1,\r\n        \"cantidad\" : 1,\r\n         \"precio\" :124\r\n    },{\r\n        \"id\":3,\r\n        \"cantidad\" :11,\r\n        \"precio\" :400\r\n    },{\r\n        \"id\":4,\r\n        \"cantidad\" : 5,\r\n         \"precio\" : 100\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/pedido?metodoPago&productsArray",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido"
+					],
+					"query": [
+						{
+							"key": "metodoPago",
+							"value": null
+						},
+						{
+							"key": "productsArray",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get para traer la lista de ordenes segun que tipo de usuario",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYW50aWFnbyIsImlzQWRtIjpmYWxzZSwiaWF0IjoxNjAwNzE2NDMyfQ.Iysvc4JI74AxBVUxuJT-9WYT4neiuDOSRevjY3PdfHw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/pedido/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

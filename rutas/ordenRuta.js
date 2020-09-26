@@ -21,5 +21,13 @@ router.get("/",
     generalesMid.validateToken,
     ordenControladores.listaDeOrdenes
 );
+router.put('/:id',
+    generalesMid.validateToken,
+    generalesMid.isAdm,
+    ordenMid.validarOrderId,
+    generalesMid.checkBody,
+    ordenMid.requireEstado,
+    ordenControladores.modificaEstado
+);
 
 module.exports= router;

@@ -336,6 +336,88 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Delete de pedidos",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJzYW50aWFnbyBsb3BleiIsImlzQWRtIjp0cnVlLCJpYXQiOjE2MDA3MTY5MzN9.26UqtEXraMSB-QP_wAoSx5JmGEdjuTOFDt1Wjy3kfw0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" :9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/pedido/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put para modificar estado del producto",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJzYW50aWFnbyBsb3BleiIsImlzQWRtIjp0cnVlLCJpYXQiOjE2MDA4OTI4MTl9.qzQcBLahE53uuk-mLoVbDedBSUdw7RCpNnudlhm9Aco",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"estado\" : \"en preparacion\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/pedido/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "28"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -71,7 +71,7 @@ paths:
         "400":
           description: "Error con la BD."
         "404":
-          description: "Username or password invalid."
+          description: "Usuario invalido."
         "200":
           description: "Usuario logueado"
   /producto:
@@ -123,7 +123,7 @@ paths:
           description: "Token no registrado como adm."
         "201":
           description: "Producto creado"
-  post:
+  put:
       tags:
       - "producto"
       summary: "Actualiza un producto"
@@ -200,6 +200,34 @@ paths:
           description: "Problema con la verificacion del Token."
         "200":
           description: "Lista de ordenes."
+put:
+      tags:
+      - "pedido"
+      summary: "Actualiza un pedido"
+      description: "Actualiza un estado pedido creado en la D"
+      operationId: "modificaEstado"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Requiere data para completar campos de pedido"
+        required: true
+        schema:
+          $ref: "#/definitions/pedido/:id"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Error con el tipo de dato de estado pedido"
+        "403":
+          description: "Token no registrado como adm."
+        "201":
+          description: "Pedido actualizado"  
     post:
       tags:
       - "pedido"
@@ -315,6 +343,13 @@ definitions:
               type: "number"
             quantity:
               type: "number"
+	estado:
+        type: "string"
+        items:
+          type: object
+          properties:
+            estado:
+              type: "string"
     xml:
       name: "pedido"
   

@@ -25,5 +25,28 @@ ordenMid.requireDataOrden = async(req, res, next)=>{
         next();
     }
 }
+ordenMid.validarOrderId = async (req, res, next) => {
+    const orden = await database.orderM.findByPk(req.params.id);
+    
+    if(orden) {
+        res.locals.order = orden.id;
+        next();
+    } else {
+        res.status(404).json({
+            message: 'La orden no existe'
+        });
+    }
+};
+ordenMid.requireEstado = (req, res, next) => {
+    const estado = req.body.estado;
+
+    if(typeof(estado) !== 'string') {
+        res.status(400).json({
+            message: 'Problema con la info del estado'
+        });
+    } else {
+        next();
+    }
+};
 
 module.exports = ordenMid;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-09-2020 a las 22:34:21
+-- Tiempo de generación: 26-09-2020 a las 21:22:09
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -31,23 +31,36 @@ CREATE TABLE `orden` (
   `id` int(11) NOT NULL,
   `metodoPago` enum('EFECTIVO','TARJETA') NOT NULL,
   `total` float NOT NULL,
-  `userId` int(11) DEFAULT NULL
+  `userId` int(11) DEFAULT NULL,
+  `estado` enum('confimardo','en preparacion','en camino','entregado') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `orden`
 --
 
-INSERT INTO `orden` (`id`, `metodoPago`, `total`, `userId`) VALUES
-(11, 'EFECTIVO', 0, 2),
-(12, 'EFECTIVO', 0, 2),
-(13, 'EFECTIVO', 0, 2),
-(14, 'EFECTIVO', 0, 2),
-(15, 'EFECTIVO', 0, 2),
-(16, 'EFECTIVO', 0, 2),
-(17, 'EFECTIVO', 748, 2),
-(18, 'EFECTIVO', 1320, 1),
-(19, 'EFECTIVO', 5024, 1);
+INSERT INTO `orden` (`id`, `metodoPago`, `total`, `userId`, `estado`) VALUES
+(11, 'EFECTIVO', 0, 2, 'confimardo'),
+(12, 'EFECTIVO', 0, 2, 'confimardo'),
+(13, 'EFECTIVO', 0, 2, 'confimardo'),
+(14, 'EFECTIVO', 0, 2, 'confimardo'),
+(15, 'EFECTIVO', 0, 2, 'confimardo'),
+(16, 'EFECTIVO', 0, 2, 'confimardo'),
+(17, 'EFECTIVO', 748, 2, 'confimardo'),
+(18, 'EFECTIVO', 1320, 1, 'confimardo'),
+(19, 'EFECTIVO', 5024, 1, 'confimardo'),
+(20, 'EFECTIVO', 5024, 1, 'confimardo'),
+(21, 'EFECTIVO', 5024, 1, 'confimardo'),
+(22, 'EFECTIVO', 5024, 1, 'confimardo'),
+(23, 'EFECTIVO', 5024, 1, 'confimardo'),
+(24, 'EFECTIVO', 5024, 1, 'confimardo'),
+(25, 'EFECTIVO', 5024, 1, 'confimardo'),
+(26, 'EFECTIVO', 5024, 1, 'confimardo'),
+(27, 'EFECTIVO', 5024, 1, 'confimardo'),
+(28, 'EFECTIVO', 5024, 1, 'en preparacion'),
+(29, 'EFECTIVO', 5024, 1, 'confimardo'),
+(30, 'EFECTIVO', 5024, 1, 'confimardo'),
+(31, 'EFECTIVO', 5024, 1, 'confimardo');
 
 -- --------------------------------------------------------
 
@@ -125,7 +138,43 @@ INSERT INTO `productoorden` (`id`, `cantidad`, `subtotal`, `ordenId`, `productoI
 (33, 3, 300, NULL, NULL),
 (34, 1, 124, NULL, NULL),
 (35, 11, 4400, NULL, NULL),
-(36, 5, 500, NULL, NULL);
+(36, 5, 500, NULL, NULL),
+(37, 1, 124, 20, 1),
+(38, 11, 4400, 20, 3),
+(39, 5, 500, 20, 4),
+(40, 1, 124, 21, 1),
+(41, 11, 4400, 21, 3),
+(42, 5, 500, 21, 4),
+(43, 1, 124, 22, 1),
+(44, 11, 4400, 22, 3),
+(45, 5, 500, 22, 4),
+(46, 1, 124, 23, 1),
+(47, 11, 4400, 23, 3),
+(48, 5, 500, 23, 4),
+(49, 1, 124, 24, 1),
+(50, 11, 4400, 24, 3),
+(51, 5, 500, 24, 4),
+(52, 1, 124, 25, 1),
+(53, 11, 4400, 25, 3),
+(54, 5, 500, 25, 4),
+(55, 1, 124, 26, 1),
+(56, 11, 4400, 26, 3),
+(57, 5, 500, 26, 4),
+(58, 1, 124, 27, 1),
+(59, 11, 4400, 27, 3),
+(60, 5, 500, 27, 4),
+(61, 1, 124, 28, 1),
+(62, 11, 4400, 28, 3),
+(63, 5, 500, 28, 4),
+(64, 1, 124, 29, 1),
+(65, 11, 4400, 29, 3),
+(66, 5, 500, 29, 4),
+(67, 1, 124, 30, 1),
+(68, 11, 4400, 30, 3),
+(69, 5, 500, 30, 4),
+(70, 1, 124, 31, 1),
+(71, 11, 4400, 31, 3),
+(72, 5, 500, 31, 4);
 
 -- --------------------------------------------------------
 
@@ -194,7 +243,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -206,7 +255,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `productoorden`
 --
 ALTER TABLE `productoorden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -232,6 +281,7 @@ ALTER TABLE `productoorden`
   ADD CONSTRAINT `productoorden_ibfk_2` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+SELECT * FROM `productoorden` ORDER BY `ordenId` DESC
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

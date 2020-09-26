@@ -20,8 +20,9 @@ orden.crarOrdenNueva = async (req, res)=>{
     
     //crea array para mandar a la tabla Pedidoorden mediante el metodo bulkCreate();
     const ordenID = nuevaOrdenBD.id;
+    console.log(ordenID + " eSTE ES EL ORDEN ID")
     const arrayProductosPedidos =  crearArrayProductosEnOrden(ordenID, dbProducto, req.body.productsArray );
-
+    console.log(arrayProductosPedidos[0].productoId + " eSTE ES EL ORDEN ID")
     const arrayParaProductoOrden = await database.productoOrdenM.bulkCreate(arrayProductosPedidos)
     .catch(async err =>{
         await database.orderM.destroy({
@@ -85,6 +86,20 @@ orden.borrarOrden = async(req, res)=>{
         ordenEliminada
     })
 }
+
+orden.modificaEstado = async (req, res) => {
+    const estadoNuevo = req.body.estado;
+    
+
+    const updatedOrder = await database.orderM
+    .update({ estado: estadoNuevo }, { where: { id: req.params.id } })
+    .catch(err => catchDatabaseEror(err, res));
+
+    res.status(200).json({
+        message: 'Orden actualizada.'
+    });
+};
+
 //Funciones auxialiares para calcular el total del precio de la orden y para captar el array de productos que van en la orden
 
 function calculaTotal(arrayPBD, arrayPUsuarios){
@@ -104,11 +119,12 @@ function crearArrayProductosEnOrden (ordenid , arrayPBD, arrayPUsuario){
     for (let i = 0; i < arrayPUsuario.length; i++){
         const productoUsuario = arrayPUsuario[i];
         const productoFiltrado =   arrayPBD.find(productoBD => productoUsuario.id === productoBD);
+        console.log("id orden y producto dentro de la func"+ productoFiltrado)
         const producto ={
             cantidad: productoUsuario.cantidad,
             subtotal: productoUsuario.cantidad * productoUsuario.precio,
-            ordenID : ordenid,
-            productoID: productoUsuario.id
+            ordenId : ordenid,
+            productoId: productoFiltrado
         }
         arrayProductoOrden[i] = producto;
     };

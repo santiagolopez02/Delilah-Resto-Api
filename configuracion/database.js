@@ -62,6 +62,11 @@ const orderM = sequelize.define("orden", {
         type: Sequelize.FLOAT,
         allowNull: false
     },
+    estado: {
+        type: Sequelize.ENUM,
+        allowNull: false,
+        values: [ 'confirmado', 'en preparacion', 'en camino', 'entregado']
+      }
     
 
 },{ freezeTableName: true , timestamps: false})
